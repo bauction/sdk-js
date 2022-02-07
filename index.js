@@ -92,7 +92,9 @@ class Bauction {
     };
     return this.actor.createAuction(auction);
   }
-  updateAuction() {}
+  updateAuction(auctionId, auctionInput) {
+    return this.actor.updateAuction(auctionId, auctionInput);
+  }
   deleteAuction(auctionId) {
     return this.actor.deleteAuction(auctionId);
   }
