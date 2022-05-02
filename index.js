@@ -40,32 +40,6 @@ class Bauction {
     this.actor = actor;
   }
 
-  createProfile(name = "", location = "", about = "") {
-    return this.actor.createProfile({
-      name,
-      location,
-      about,
-    });
-  }
-  getMyProfile() {
-    return this.actor.getProfile();
-  }
-  updateMyProfile(name = "", location = "", about = "") {
-    return this.actor.updateProfile({
-      bio: {
-        name,
-        location,
-        about,
-      },
-    });
-  }
-  deleteMyProfile() {
-    return this.actor.deleteProfile();
-  }
-  getProfileById(sellerId) {
-    return this.actor.getProfileById(sellerId);
-  }
-
   createAuction(
     name,
     startDate,
