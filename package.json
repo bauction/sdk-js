@@ -1,6 +1,6 @@
 {
-  "name": "bauction-sdk",
-  "version": "1.0.0",
+  "name": "@rivram/bauction-js",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "type": "module",
@@ -20,6 +20,9 @@
     "crypto-js": "^4.1.1",
     "express": "^4.17.2",
     "node-fetch": "^3.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

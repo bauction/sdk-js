@@ -5,19 +5,19 @@ Javascript SDK to access Bauction on the internet computer
 **Installation:**
 
 ```
-yarn add bauction-js
+yarn add bauction-sdk
 ```
 
 or
 
 ```
-npm install bauction-js
+npm install bauction-sdk
 ```
 
 **Basic Usage:**
 
 ```js
-import Bauction from "bauction-js";
+import Bauction from "bauction-sdk";
 const bauctionInstance = new Bauction();
 //use async function for this:
 await bauctionInstance.initIdentity("path-to-secret-key");
@@ -28,7 +28,7 @@ bauctionInstance.getAllAuctions(); //to fetch all auctions from bauction caniste
 ## Example:
 
 ```js
-import Bauction from "bauction-js";
+import Bauction from "bauction-sdk";
 const bauctionIns = new Bauction();
 
 const initializeBauction = async () => {
