@@ -20,7 +20,7 @@ npm install @bauction/sdk-js
 import Bauction from "@bauction/sdk-js";
 const bauctionInstance = new Bauction();
 //use async function for this:
-await bauctionInstance.initIdentity("path-to-secret-key");
+await bauctionInstance.initIdentity("secret_key");
 
 bauctionInstance.getAllAuctions(); //to fetch all auctions from bauction canister.
 ```
@@ -32,7 +32,7 @@ import Bauction from "@bauction/sdk-js";
 const bauctionIns = new Bauction();
 
 const initializeBauction = async () => {
-  await bauctionIns.initIdentity("/root/user/my_secret_key.cer");
+  await bauctionIns.initIdentity("secret_key");
 };
 
 initializeBauction();
