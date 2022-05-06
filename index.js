@@ -1,6 +1,5 @@
 import * as agent from "@dfinity/agent";
 import fetch from "node-fetch";
-import fs from "fs";
 import { idlFactory } from "./bauction.did.js";
 import Secp256k1KeyIdentity from "@dfinity/identity";
 import * as crypto from "crypto";
@@ -11,7 +10,7 @@ const { Actor, HttpAgent } = agent;
 
 class Bauction {
   constructor(host = "https://ic0.app") {
-    this.canisterId = "rrkah-fqaaa-aaaaa-aaaaq-cai";
+    this.canisterId = "vtud2-nyaaa-aaaai-qax6q-cai";
     this.actor = null;
     this.agent = null;
     this.identity = null;
@@ -19,10 +18,10 @@ class Bauction {
   }
 
   async initIdentity(secretKey) {
-    const buffer = fs.readFileSync(secretKey);
-    const key = buffer.toString("utf-8");
-
-    const privateKey = crypto.createHash("sha256").update(key).digest("base64");
+    const privateKey = crypto
+      .createHash("sha256")
+      .update(secretKey)
+      .digest("base64");
     const identity = Secp256k1KeyIdentity.Secp256k1KeyIdentity.fromSecretKey(
       Buffer.from(privateKey, "base64")
     );
@@ -31,6 +30,7 @@ class Bauction {
       identity: identity,
     });
     await agent.fetchRootKey();
+
     const actor = Actor.createActor(idlFactory, {
       canisterId: this.canisterId,
       agent,

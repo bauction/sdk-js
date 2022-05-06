@@ -1,6 +1,6 @@
 {
-  "name": "bauction-sdk",
-  "version": "1.0.0",
+  "name": "@bauction/sdk-js",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "type": "module",
@@ -8,6 +8,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:bauction/sdk-js.git"
+  },
   "dependencies": {
     "@dfinity/agent": "^0.10.2",
     "@dfinity/auth-client": "^0.10.2",
@@ -20,6 +24,9 @@
     "crypto-js": "^4.1.1",
     "express": "^4.17.2",
     "node-fetch": "^3.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
