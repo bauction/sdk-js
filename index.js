@@ -9,19 +9,19 @@ global.fetch = fetch;
 const { Actor, HttpAgent } = agent;
 
 class Bauction {
-  constructor(host = "https://ic0.app") {
-    this.canisterId = "vtud2-nyaaa-aaaai-qax6q-cai";
+  constructor(
+    host = "https://ic0.app",
+    canisterId = "vtud2-nyaaa-aaaai-qax6q-cai"
+  ) {
+    this.canisterId = canisterId;
     this.actor = null;
     this.agent = null;
     this.identity = null;
     this.host = host;
   }
 
-  async initIdentity(secretKey) {
-    const privateKey = crypto
-      .createHash("sha256")
-      .update(secretKey)
-      .digest("base64");
+  async initIdentity(key) {
+    const privateKey = crypto.createHash("sha256").update(key).digest("base64");
     const identity = Secp256k1KeyIdentity.Secp256k1KeyIdentity.fromSecretKey(
       Buffer.from(privateKey, "base64")
     );
@@ -30,7 +30,6 @@ class Bauction {
       identity: identity,
     });
     await agent.fetchRootKey();
-
     const actor = Actor.createActor(idlFactory, {
       canisterId: this.canisterId,
       agent,
@@ -40,17 +39,18 @@ class Bauction {
     this.actor = actor;
   }
 
-  createAuction(
-    name,
-    startDate,
-    endDate,
-    description,
-    minBidAmt,
-    maxBidAmt,
-    category,
-    location,
-    auctionType
-  ) {
+  createAuction(createAuctionPayload) {
+    const {
+      name,
+      startDate,
+      endDate,
+      description,
+      minBidAmt = 0,
+      maxBidAmt = 0,
+      category,
+      location,
+      auctionType,
+    } = createAuctionPayload;
     const auction = {
       name,
       startDate,
@@ -99,4 +99,4 @@ class Bauction {
   }
 }
 
-export default Bauction;
+export { Bauction as bauction };

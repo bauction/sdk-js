@@ -4,6 +4,7 @@ export const idlFactory = ({ IDL }) => {
   const AuctionDirectionType = IDL.Variant({
     ETender: IDL.Null,
     ForwardAuction: IDL.Null,
+    BidLogAuction: IDL.Null,
     ReverseAuction: IDL.Null,
     FlexibleOffers: IDL.Null,
   });
@@ -41,17 +42,12 @@ export const idlFactory = ({ IDL }) => {
     location: IDL.Text,
     startDate: IDL.Text,
   });
-  const Bio = IDL.Record({
-    about: IDL.Text,
-    name: IDL.Text,
-    location: IDL.Text,
-  });
   const Error = IDL.Variant({
     NotFound: IDL.Null,
     NotAuthorized: IDL.Null,
     AlreadyExists: IDL.Null,
   });
-  const Result = IDL.Variant({ ok: IDL.Null, err: Error });
+  const Result_3 = IDL.Variant({ ok: IDL.Bool, err: Error });
   const AuctionType = IDL.Record({
     id: IDL.Text,
     maxBidAmt: IDL.Nat,
@@ -69,33 +65,25 @@ export const idlFactory = ({ IDL }) => {
     startDate: IDL.Text,
   });
   List__1.fill(IDL.Opt(IDL.Tuple(AuctionType, List__1)));
-  const Result_3 = IDL.Variant({ ok: List__1, err: Error });
-  const Result_4 = IDL.Variant({ ok: IDL.Nat, err: Error });
-  const Profile = IDL.Record({ id: IDL.Principal, bio: Bio });
-  const Result_2 = IDL.Variant({ ok: Profile, err: Error });
-  const Result_1 = IDL.Variant({ ok: AuctionResponse, err: Error });
-  const ProfileUpdate = IDL.Record({ bio: Bio });
+  const Result_1 = IDL.Variant({ ok: List__1, err: Error });
+  const Result_2 = IDL.Variant({ ok: IDL.Nat, err: Error });
+  const Result = IDL.Variant({ ok: AuctionResponse, err: Error });
   return IDL.Service({
     bidOnAuction: IDL.Func([IDL.Text, IDL.Nat, IDL.Text], [IDL.Bool], []),
     convertPrincipalToText: IDL.Func([IDL.Principal], [IDL.Text], []),
     createAuction: IDL.Func([AuctionInput], [IDL.Opt(AuctionResponse)], []),
-    createProfile: IDL.Func([Bio], [Result], []),
-    deleteAuction: IDL.Func([IDL.Text], [Result], []),
-    deleteProfile: IDL.Func([], [Result], []),
+    deleteAuction: IDL.Func([IDL.Text], [Result_3], []),
     findAuction: IDL.Func([IDL.Text], [IDL.Opt(AuctionType)], ["query"]),
-    getAllAuctions: IDL.Func([], [Result_3], ["query"]),
-    getAuctionBySellerId: IDL.Func([IDL.Text], [Result_3], ["query"]),
-    getHighestBid: IDL.Func([IDL.Text], [IDL.Nat], []),
-    getMyAuctionCount: IDL.Func([], [Result_4], []),
-    getMyAuctions: IDL.Func([], [Result_3], []),
+    getAllAuctions: IDL.Func([], [Result_1], ["query"]),
+    getAuctionBySellerId: IDL.Func([IDL.Text], [Result_1], ["query"]),
+    getHighestBid: IDL.Func([IDL.Text], [IDL.Nat], ["query"]),
+    getMyAuctionCount: IDL.Func([], [Result_2], ["query"]),
+    getMyAuctions: IDL.Func([], [Result_1], ["query"]),
     getMyIdentity: IDL.Func([], [IDL.Text], []),
-    getProfile: IDL.Func([], [Result_2], []),
-    getProfileById: IDL.Func([IDL.Text], [Result_2], ["query"]),
-    getProfileByPrincipalId: IDL.Func([IDL.Principal], [Result_2], []),
+    getTime: IDL.Func([], [IDL.Int], ["query"]),
     getWinner: IDL.Func([IDL.Text], [IDL.Text], ["query"]),
     healthcheck: IDL.Func([], [IDL.Bool], []),
-    updateAuction: IDL.Func([IDL.Text, AuctionInput], [Result_1], []),
-    updateProfile: IDL.Func([ProfileUpdate], [Result], []),
+    updateAuction: IDL.Func([IDL.Text, AuctionInput], [Result], []),
   });
 };
 export const init = ({ IDL }) => {
